@@ -28,6 +28,9 @@ typedef struct {
     char subclasses[MAX_SUBCLASSES][MAX_STRING_LENGTH];
     
     bool hasSpellcasting;
+    char spellcastingType[4] = NULL;
+
+    int profBonus = 2;
 } Class;
 
 // Function prototypes
@@ -36,5 +39,10 @@ void displayClassInfo(Class* chosenClass);
 void extraFeatureDisplay(Class* chosenClass);
 char* detailedSearchClass(Class* chosenClass, const char* searchTerm);
 char* detailedSearchFeature(const char* featureName);
+
+// Load class data from a plain-text file (see example in `classes/Barbarian.txt`)
+// Format: lines of "Key: value". Lists use semicolons to separate items.
+// Returns 0 on success, non-zero on error.
+int loadClassFromFile(const char* filepath, Class* outClass);
 
 #endif

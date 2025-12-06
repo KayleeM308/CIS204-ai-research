@@ -1,0 +1,33 @@
+# Example class file for the Barbarian
+# Lines are Key: value. Lists use semicolons to separate items.
+
+Name: Barbarian
+HitDie: d12
+ArmorProf: Light Armor; Medium Armor; Shields
+WeaponProf: Simple Weapons; Martial Weapons
+SavingThrows: Strength; Constitution
+Skills: Animal Handling; Athletics; Survival; Intimidation; Nature; Perception; Survival
+ExtraProf: N/A
+Features: 
+1: Rage; Unarmored Defense; Weapon Mastery
+2: Danger Sense; Reckless Attack
+3: Subclasses*; Primal Knowledge
+4: Ability Score Improvement
+5: Extra Attack; Fast Movement
+6: Subclass feature
+7: Feral Instinct; Instinctive Pounce
+8: Ability Score Improvement
+9: Brutal Strike
+10: Subclass feature
+11: Relentless Rage
+12: Ability Score Improvement
+13: Improved Brutal Strike
+14: Subclass feature
+15: Persistent Rage
+16: Ability Score Improvement
+17: Improved Brutal Strike
+18: Indomitable Might
+19: Epic Boon
+20: Primal Champion
+Subclasses: Path of the Berserker; Path of the Wild Heart; Path of the World Tree; Path of the Zealot
+Spellcasting: no

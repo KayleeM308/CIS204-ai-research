@@ -17,7 +17,11 @@ int main()
     //   - Class pointer to hold retrieved class data
     //   - String buffer to store user input
     //   - Loop control variables
+    //   - Include a Linked List for loaded classes
     
+    // Initialize program: Get information from files
+    //   - Add loaded classes to linked list for easy access
+
     // TODO: Display welcome message and program description
     
     // TODO: Create a menu loop that:
