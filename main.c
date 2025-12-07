@@ -1,4 +1,5 @@
 #include "DNDClass.h"
+#include "DNDClass.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,6 +22,14 @@ int main()
     
     // Initialize program: Get information from files
     //   - Add loaded classes to linked list for easy access
+
+    Class Barbarian;
+    char filepath[50] = "classes/Barbarian.txt";
+
+    loadClassFromFile(filepath, &Barbarian);
+
+    printf("%s\n", Barbarian.name);
+
 
     // TODO: Display welcome message and program description
     

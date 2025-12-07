@@ -26,11 +26,9 @@ typedef struct {
     
     char features[MAX_FEATURES][MAX_STRING_LENGTH];
     char subclasses[MAX_SUBCLASSES][MAX_STRING_LENGTH];
-    
-    bool hasSpellcasting;
-    char spellcastingType[4] = NULL;
+    char spellcastingType[4]; // "Full", "Half", "Pact", "None"
 
-    int profBonus = 2;
+    int profBonus;
 } Class;
 
 // Function prototypes

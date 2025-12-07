@@ -21,11 +21,41 @@ int loadClassFromFile(const char* filepath, Class* outClass)
 
     // Read and parse the file line by line
     char line[512]; // Buffer for reading lines
+    char originalLine[512]; //To keep original line
+    char* token; //Key token for compare
+    char* temp; //Rest of line after key
     
     //While there are lines to read
-    while (fgets(line, sizeof(line), file)) {
+    while (fgets(line, sizeof(line), classfile) != NULL) {
+        strcpy(originalLine, line); //Store original line for debugging
+
+        printf("Line: %s\n", line);
+
+        token = strtok(originalLine, ":"); //Takes the first token (key)
+        temp = strtok(NULL, ""); //Takes rest of the string
+        temp++; //Skips the space
+        line[0] = '\0';
+        strcpy(line, temp); //line is assigned the rest of the string
+
+        printf("token: %s\n", token);
+        printf("temp: %s\n", temp);
         
+        //Compare key and populate struct fields
+        if (strcmp(token, "Name") == 0) {
+            strcpy(outClass->name, temp);
+        }
+        else if(strcmp(token, "HitDie") == 0) {
+            strcpy(outClass->hitDie, temp);
+        }
+        /*else if(strcmp(token, "ArmorProf") == 0) {
+            char* profToken;
+
+        }*/
+
     }
+
+    fclose(classfile);
+
 
 return 0;
 }   
