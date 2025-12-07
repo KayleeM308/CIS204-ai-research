@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 // Function: loadClassFromFile
 // Purpose: Load class data from a plain-text file into a Class struct
@@ -24,6 +25,7 @@ int loadClassFromFile(const char* filepath, Class* outClass)
     char originalLine[512]; //To keep original line
     char* token; //Key token for compare
     char* temp; //Rest of line after key
+    int i; //loop variable
     
     //While there are lines to read
     while (fgets(line, sizeof(line), classfile) != NULL) {
@@ -41,16 +43,60 @@ int loadClassFromFile(const char* filepath, Class* outClass)
         printf("temp: %s\n", temp);
         
         //Compare key and populate struct fields
+        //// Name
         if (strcmp(token, "Name") == 0) {
             strcpy(outClass->name, temp);
         }
+        //// Hit Die
         else if(strcmp(token, "HitDie") == 0) {
             strcpy(outClass->hitDie, temp);
         }
-        /*else if(strcmp(token, "ArmorProf") == 0) {
+        //// Armor Proficiencies
+        else if(strcmp(token, "ArmorProf") == 0) {
             char* profToken;
+            i = 0;
 
-        }*/
+            //Going through the list of proficiencies
+            while ((profToken = strtok(line, ";")) != NULL) {
+                if (isspace(profToken[0]))
+                    profToken++; //Skip leading space
+                strcpy(outClass->armorProf[i], profToken);
+                printf("%s\n", outClass->armorProf[i]);
+                line[0] = '\0'; //Clear line for temp
+                
+                //Avoids segmentation fault
+                temp = strtok(NULL, "");
+                if (temp != NULL)
+                    strcpy(line, temp);
+                i++;
+            }
+        }
+        //// Weapon Proficiencies
+        else if(strcmp(token, "WeaponProf") == 0) {
+            char* profToken;
+            i = 0;
+
+            //Going through the list of proficiencies
+            while ((profToken = strtok(line, ";")) != NULL) {
+                if (isspace(profToken[0]))
+                    profToken++; //Skip leading space
+                strcpy(outClass->weaponProf[i], profToken);
+                printf("%s\n", outClass->weaponProf[i]);
+                line[0] = '\0'; //Clear line for temp
+                
+                //Avoids segmentation fault
+                temp = strtok(NULL, "");
+                if (temp != NULL)
+                    strcpy(line, temp);
+                i++;
+            }
+        }
+        //// Saving Throw Proficiencies
+
+
+        token = NULL;
+        temp = NULL;
+        i = 0;
 
     }
 
