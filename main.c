@@ -30,7 +30,6 @@ int main()
 
     printf("%s\n", Barbarian.name);
 
-
     // TODO: Display welcome message and program description
     
     // TODO: Create a menu loop that:

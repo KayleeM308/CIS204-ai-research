@@ -5,6 +5,7 @@ WeaponProf: Simple Weapons; Martial Weapons
 SavingThrows: Strength; Constitution
 Skills: Animal Handling; Athletics; Survival; Intimidation; Nature; Perception; Survival
 ExtraProf: N/A
+Features:
 1: Rage; Unarmored Defense; Weapon Mastery
 2: Danger Sense; Reckless Attack
 3: Subclasses*; Primal Knowledge
@@ -25,5 +26,5 @@ ExtraProf: N/A
 18: Indomitable Might
 19: Epic Boon
 20: Primal Champion
-Subclasses: Path of the Berserker; Path of the Wild Heart; Path of the World Tree; Path of the Zealot
 Spellcasting: None
+Subclasses: Path of the Berserker; Path of the Wild Heart; Path of the World Tree; Path of the Zealot

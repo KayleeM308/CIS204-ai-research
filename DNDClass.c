@@ -4,6 +4,20 @@
 #include <string.h>
 #include <ctype.h>
 
+////Extra feature; used in loadClassFromFile extra features
+//Found this
+bool string_in_array(char* target, char* arr[], int size) {
+    if (target == NULL || arr == NULL) 
+        return false; // Null check
+
+    for (int i = 0; i < size; i++) {
+        if (arr[i] && strcmp(target, arr[i]) == 0) {
+            return true; // Found
+        }
+    }
+    return false; // Not found
+}
+
 // Function: loadClassFromFile
 // Purpose: Load class data from a plain-text file into a Class struct
 // Algorithm:
@@ -30,14 +44,14 @@ int loadClassFromFile(const char* filepath, Class* outClass)
     //While there are lines to read
     while (fgets(line, sizeof(line), classfile) != NULL) {
         strcpy(originalLine, line); //Store original line for debugging
-
         printf("Line: %s\n", line);
 
         token = strtok(originalLine, ":"); //Takes the first token (key)
         temp = strtok(NULL, ""); //Takes rest of the string
         temp++; //Skips the space
         line[0] = '\0';
-        strcpy(line, temp); //line is assigned the rest of the string
+        if (temp != NULL)
+            strcpy(line, temp); //line is assigned the rest of the string
 
         printf("token: %s\n", token);
         printf("temp: %s\n", temp);
@@ -92,11 +106,117 @@ int loadClassFromFile(const char* filepath, Class* outClass)
             }
         }
         //// Saving Throw Proficiencies
+        else if(strcmp(token, "SavingThrows") == 0) {
+            char* profToken;
+            for (i = 0; i < 2; i++) {
+                profToken = strtok(line, ";");
+                if (isspace(profToken[0]))
+                    profToken++; //Skip leading space
+                strcpy(outClass->savingThrowProf[i], profToken);
+                printf("%s\n", outClass->savingThrowProf[i]);
+                line[0] = '\0'; //Clear line for temp
+                
+                //Avoids segmentation fault
+                temp = strtok(NULL, "");
+                if (temp != NULL)
+                    strcpy(line, temp);
+            }
+        }
+        //// Skill Proficiencies
+        else if(strcmp(token, "Skills") == 0) {
+            char* profToken;
+            i = 0;
 
+            //Going through the list of proficiencies
+            while ((profToken = strtok(line, ";")) != NULL) {
+                if (isspace(profToken[0]))
+                    profToken++; //Skip leading space
+                strcpy(outClass->skillProf[i], profToken);
+                printf("%s\n", outClass->skillProf[i]);
+                line[0] = '\0'; //Clear line for temp
+                
+                //Avoids segmentation fault
+                temp = strtok(NULL, "");
+                if (temp != NULL)
+                    strcpy(line, temp);
+                i++;
+            }
+        }
+        //// Extra (Tools & Languages) Profs
+        else if(strcmp(token, "ExtraProf") == 0) {
+            char* profToken;
+            i = 0;
 
-        token = NULL;
-        temp = NULL;
-        i = 0;
+            //Going through the list of proficiencies
+            while ((profToken = strtok(line, ";")) != NULL) {
+                if (isspace(profToken[0]))
+                    profToken++; //Skip leading space
+                strcpy(outClass->extraProf[i], profToken);
+                printf("%s\n", outClass->extraProf[i]);
+                line[0] = '\0'; //Clear line for temp
+                
+                //Avoids segmentation fault
+                temp = strtok(NULL, "");
+                if (temp != NULL)
+                    strcpy(line, temp);
+                i++;
+            }
+        }
+        //// Features (1 - 20)
+        else if(strcmp(token, "Features") == 0) {
+            int j;
+            for (i = 0; i < 20; i++) {
+                
+                //Variable decleration
+                char* profToken;
+                int extraCounter = 0;
+                j = 0;
+
+                ////Got through the features: 1 to 20 before returning to the file
+                fgets(line, sizeof(line), classfile);
+                originalLine[0] = '\0'; //clear originalLine for this
+                strcpy(originalLine, line); //Store original line for debugging
+                printf("Line: %s\n", line);
+
+                token = strtok(originalLine, ":"); //Takes the first token (key)
+                temp = strtok(NULL, ""); //Takes rest of the string
+                temp++; //Skips the space
+                strcpy(line, temp); //line is assigned the rest of the string
+
+                printf("token: %s\n", token);
+                printf("temp: %s\n", temp);
+                printf("Line after temp: %s\n", line);
+
+                
+
+                //Going through the list of proficiencies
+                while ((profToken = strtok(line, ";")) != NULL) {
+                    printf("Line before everything: %s\n", line);
+                    printf("Proftoken: %s\n", profToken);
+                    if (isspace(profToken[0]))
+                        profToken++; //Skip leading space
+                    strcpy(outClass->features[i][j], profToken);
+                    //if (strchr(profToken, '*'))
+                    //    strcpy(outClass->extraFeatName[extraCounter++], profToken);
+                    printf("%s\n", outClass->features[i][j]);
+                    
+
+                    printf("Line before prof reset: %s\n", line);
+                    temp = strtok(NULL, "");
+                    printf("Temp after prof: %s\n", temp);
+                    line[0] = '\0'; //Clear line for temp
+                    if (temp != NULL) {
+                        strcpy(line, temp);
+                        printf("Line after prof reset: %s\n", line);
+                    }
+
+                }
+            }
+        }
+        else if (strcmp(token, "Spellcasting") == 0) {
+            strcpy(outClass->spellcastingType, temp);
+        }
+        //else if (string_in_array(String extraFeature = strcat(token, "*"), ))
 
     }
 
