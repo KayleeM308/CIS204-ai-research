@@ -27,7 +27,6 @@ typedef struct {
     char features[MAX_FEATURES][MAX_FEATURES][MAX_STRING_LENGTH];
     char extraFeatName[MAX_FEATURES][MAX_STRING_LENGTH];
     char extraFeatList[MAX_FEATURES][MAX_FEATURES][MAX_STRING_LENGTH];
-    //char subclasses[MAX_SUBCLASSES][MAX_STRING_LENGTH];
     char spellcastingType[4]; // "Full", "Half", "Pact", "None"
 
     int profBonus;

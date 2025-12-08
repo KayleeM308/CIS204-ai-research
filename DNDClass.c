@@ -15,6 +15,18 @@ int search_in_features(char* search, char arr[][256]) {
     return -1; // Not found
 }
 
+////Looping print function: seperated because of repetitive code. 
+// Used in displayClassInfo function
+void loopingPrint(char arr[][256]) {
+    int i = 0; //Initialize i
+    while (arr[i][0] != '\0') { //To end early if no (more) proficiencies
+        if (i != 0) //To ensure no comma before first
+            printf(", ");
+        printf("%s", arr[i]);
+        i++; //Incrementation
+    }
+}
+
 // Function: loadClassFromFile
 // Purpose: Load class data from a plain-text file into a Class struct
 // Algorithm:
@@ -186,7 +198,7 @@ int loadClassFromFile(const char* filepath, Class* outClass)
         }
         //// Spellcasting
         else if (strcmp(token, "Spellcasting") == 0) {
-            strcpy(outClass->spellcastingType, temp);
+            strncpy(outClass->spellcastingType, temp, 4);
         }
         ////Extra features
         //Calls search_in_features function for index, if index > 0 the coninues, if not then pass
@@ -243,8 +255,60 @@ Class* getClassInfo(const char* className)
 //   8. Call extraFeatureDisplay() if applicable
 void displayClassInfo(Class* chosenClass)
 {
-    // TODO: Implement formatted display of class information
-    
+    //Display class contents.
+    printf("\n||||| CLASS OVERVIEW |||||\n\n");
+    printf("%s\n", chosenClass->name); //Class name
+    printf("Hit Point Die: %s", chosenClass->hitDie); //Class hit die
+    printf("Saving Throws: %s, %s", chosenClass->savingThrowProf[0], chosenClass->savingThrowProf[1]); //Only ever 2
+
+    //Looping for other proficiences
+    //Armor
+    printf("Armor: ");
+    loopingPrint(chosenClass->armorProf);
+
+    //Weapon
+    printf("Weapon: ");
+    loopingPrint(chosenClass->weaponProf);
+
+    //Skills
+    printf("Skills (Chosen from): ");
+    loopingPrint(chosenClass->skillProf);
+
+    //Languages and Tools
+    printf("Tool and Language: ");
+    loopingPrint(chosenClass->extraProf);
+
+    //Spellcasting
+    printf("Has Spellcasting?: ");
+    if (strcmp(chosenClass->spellcastingType, "None") == 0) {
+        printf("No");
+    } else {
+        printf("Yes, ");
+        if (strcmp(chosenClass->spellcastingType, "Pact") == 0) {
+            printf("Pact Magic");
+        } else {
+            printf("%s Caster", chosenClass->spellcastingType);
+        }
+    }
+
+    //Features
+    printf("\n\nFeatures:\n");
+    for (int j = 0; j < 20; j++) {
+        printf("%d: ", j + 1);
+        loopingPrint(chosenClass->features[j]);
+    }
+
+    //Extra Features
+    printf("\n");
+    int j = 0; //Initialize i
+    while (chosenClass->extraFeatName[j][0] != '\0') { //To end early if no (more) extra
+        printf("%s ", chosenClass->extraFeatName[j]);
+        loopingPrint(chosenClass->extraFeatList[j]);
+        j++;
+        printf("\n");
+    }
+    printf("\n");
+
     return;
 }
 

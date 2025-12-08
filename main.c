@@ -28,7 +28,7 @@ int main()
 
     loadClassFromFile(filepath, &Barbarian);
 
-    printf("%s\n", Barbarian.name);
+    displayClassInfo(&Barbarian);
 
     // TODO: Display welcome message and program description
     
