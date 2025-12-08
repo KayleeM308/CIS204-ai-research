@@ -5,8 +5,7 @@ WeaponProf: Simple Weapons; Martial Weapons
 SavingThrows: Strength; Constitution
 Skills: Animal Handling; Athletics; Survival; Intimidation; Nature; Perception; Survival
 ExtraProf: N/A
-Features:
-1: Rage; Unarmored Defense; Weapon Mastery
+1: Unarmored Defense; Rage; Weapon Mastery
 2: Danger Sense; Reckless Attack
 3: Subclasses*; Primal Knowledge
 4: Ability Score Improvement
