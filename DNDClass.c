@@ -50,7 +50,7 @@ int loadClassFromFile(const char* filepath, Class* outClass)
     }
 
     // Variable Declaration
-    char line[512]; // Buffer for reading lines
+    char line[256]; // Buffer for reading lines
     //char originalLine[512]; //To keep original line
     char* token; //Key token for compare
     char* temp; //Rest of line after key
@@ -58,10 +58,16 @@ int loadClassFromFile(const char* filepath, Class* outClass)
     int featureCnt = 0;
     int extraFeatCnt = 0;
     int extraListPos = 0; //Position of extra features. Will always have Subclasses
+    int length;
     
     //While there are lines to read
     while ((temp = fgets(line, sizeof(line), classfile)) != NULL) { //Makes temp = line to save original line
-    
+
+        length = strlen(line);
+        if (length > 0 && temp[length - 1] == '\n') {
+            temp[length - 1] = '\0';
+        }
+
         token = strtok_r(temp, ":", &temp); //Takes the first token (key)
 
         //Compare key and populate struct fields
@@ -136,10 +142,7 @@ int loadClassFromFile(const char* filepath, Class* outClass)
 
                 //If extra feature
                 if (strchr(profToken, '*') != NULL) {
-                    if (strchr(profToken, '\n') != NULL)
-                        strncpy(outClass->extraFeatName[extraFeatCnt], profToken, sizeof(profToken)/sizeof(profToken[0]));
-                    else
-                        strcpy(outClass->extraFeatName[extraFeatCnt], profToken);
+                    strcpy(outClass->extraFeatName[extraFeatCnt], profToken);
                     extraFeatCnt++;
                 }
 
@@ -189,12 +192,17 @@ return 0;
 //   6. If class not found, return NULL
 Class* getClassInfo(char* className, Class* classList, int classCount) 
 {
+    Class* classFound = NULL;
     // TODO: Implement class lookup and struct population
+    for (int i = 0; i < classCount; i++) {
+        printf("Searching... checking %s for match...\n", classList[i].name);
+        if (strcmp(className, classList[i].name) == 0) {
+            classFound = &classList[i];
+            break;
+        }
+    }
 
-
-
-    
-    return NULL;
+    return classFound;
 }
 
 // Function: displayClassInfo
@@ -210,31 +218,36 @@ Class* getClassInfo(char* className, Class* classList, int classCount)
 //   8. Call extraFeatureDisplay() if applicable
 void displayClassInfo(Class* chosenClass)
 {
+    if (chosenClass == NULL) {
+        printf("The chosen class does not exist!\n");
+        return;
+    }
+
     //Display class contents.
     printf("\n||||| CLASS OVERVIEW |||||\n\n");
     printf("%s\n", chosenClass->name); //Class name
-    printf("Hit Point Die: %s", chosenClass->hitDie); //Class hit die
-    printf("Saving Throws: %s and %s", chosenClass->savingThrowProf[0], chosenClass->savingThrowProf[1]); //Only ever 2
+    printf("\nHit Point Die: %s", chosenClass->hitDie); //Class hit die
+    printf("\nSaving Throws: %s and %s", chosenClass->savingThrowProf[0], chosenClass->savingThrowProf[1]); //Only ever 2
 
     //Looping for other proficiences
     //Armor
-    printf("Armor: ");
+    printf("\nArmor: ");
     loopingPrint(chosenClass->armorProf);
 
     //Weapon
-    printf("Weapon: ");
+    printf("\nWeapon: ");
     loopingPrint(chosenClass->weaponProf);
 
     //Skills
-    printf("Skills (Chosen from):\n ");
+    printf("\nSkills (Chosen from):\n ");
     loopingPrint(chosenClass->skillProf);
 
     //Languages and Tools
-    printf("Tool and Language: ");
+    printf("\nTool and Language: ");
     loopingPrint(chosenClass->extraProf);
 
     //Spellcasting
-    printf("Has Spellcasting?: ");
+    printf("\nHas Spellcasting?: ");
     if (strcmp(chosenClass->spellcastingType, "None") == 0) {
         printf("No");
     } else {
@@ -247,9 +260,9 @@ void displayClassInfo(Class* chosenClass)
     }
 
     //Features
-    printf("\n\nFeatures:\n");
+    printf("\n\nFeatures:");
     for (int j = 0; j < 20; j++) {
-        printf("%d: ", j + 1);
+        printf("\n%d: ", j + 1);
         loopingPrint(chosenClass->features[j]);
     }
 

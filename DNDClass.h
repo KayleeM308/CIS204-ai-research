@@ -4,12 +4,12 @@
 #include <stdbool.h>
 
 // Define array size limits
-#define MAX_ARMOR_PROF 10
-#define MAX_WEAPON_PROF 15
-#define MAX_SAVE_THROWS 6
+#define MAX_ARMOR_PROF 4
+#define MAX_WEAPON_PROF 4
+#define MAX_SAVE_THROWS 2
 #define MAX_SKILLS 18
 #define MAX_EXTRA_PROF 10
-#define MAX_FEATURES 40
+#define MAX_FEATURES 30
 #define MAX_SUBCLASSES 4
 #define MAX_STRING_LENGTH 256
 
@@ -28,8 +28,6 @@ typedef struct {
     char extraFeatName[MAX_FEATURES][MAX_STRING_LENGTH];
     char extraFeatList[MAX_FEATURES][MAX_FEATURES][MAX_STRING_LENGTH];
     char spellcastingType[4]; // "Full", "Half", "Pact", "None"
-
-    int profBonus;
 } Class;
 
 // Function prototypes

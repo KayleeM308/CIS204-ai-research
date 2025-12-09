@@ -24,26 +24,33 @@ int main()
     //   - Add loaded classes to linked list for easy access
 
     //Variable Declelartion
-    /*int numClass = 12; //Number of classes
-    char filepath[] = "classes/";
-    Class classList[numClass]; //Array to hold all classes;
-    char classFiles[12][20] = {
-        "Barbarian.txt", "Bard.txt", "Cleric.txt", "Druid.txt", "Fighter.txt", "Monk.txt",
-        "Paladin.txt", "Ranger.txt", "Rogue.txt", "Sorcerer.txt", "Warlock.txt", "Wizard.txt"
-    };
+    int numClass = 12; //Number of classes
+    char filepath[50];
+    Class classList[12]; //Array to hold all classes;
+    Class* matchClass;
 
-    Class* currClass;
-    Class* matchingClass; //Pre defined pointer class for the function
+    char classFiles[12][50] = { //Array of class files
+        "classes/Barbarian.txt", "classes/Bard.txt", "classes/Cleric.txt", "classes/Druid.txt", 
+        "classes/Fighter.txt", "classes/Monk.txt", "classes/Paladin.txt", "classes/Ranger.txt", 
+        "classes/Rogue.txt", "classes/Sorcerer.txt", "classes/Warlock.txt", "classes/Wizard.txt"
+    };
 
     //Load each class from the files
     for (int i = 0; i < numClass; i++) {
-        loadClassFromFile((strcat(filepath, classFiles[i])), &classList[i]);
-    }*/
+        strcpy(filepath, classFiles[i]); //Copy class file to filepath
 
-    Class Fighter;
-    loadClassFromFile("classes/Fighter.txt", &Fighter);
-    displayClassInfo(&Fighter);
+        memset(&classList[i], 0, sizeof(classList[i])); //Zero struct
 
+        loadClassFromFile(filepath, &classList[i]); //load the class
+
+        filepath[0] = '\0'; //Clear filepath
+    }
+
+    matchClass = getClassInfo("Paladin", classList, numClass);
+    printf("Address: %p\n", matchClass);
+    //matchClass = &classList[0];
+    if (matchClass != NULL)
+        displayClassInfo(matchClass);
 
 
 
