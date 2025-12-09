@@ -1,29 +1,30 @@
-Name: Sorcerer
-HitDie: 
-ArmorProf: 
-WeaponProf: 
-SavingThrows: 
-Skills: 
-ExtraProf: 
-1: 
-2: 
-3: 
-4: 
-5: 
-6: 
-7: 
-8: 
-9: 
-10: 
-11: 
-12: 
-13: 
-14: 
-15: 
-16: 
-17: 
-18: 
-19: 
-20: 
-Spellcasting: 
-Subclasses:
+Name:Sorcerer
+HitDie:d6
+ArmorProf:None
+WeaponProf:Simple Weapons
+SavingThrows:Constitution;Charisma
+Skills:Arcana;Deception;Insight;Intimidation;Persuasion;Religion
+ExtraProf:N/A
+1:Spellcasting;Innate Sorcery
+2:Font of Magic;Metamagic*
+3:Subclasses*
+4:Ability Score Improvement
+5:Sorcerous Restoration
+6:Subclass feature
+7:Sorcery Incarnate
+8:Ability Score Improvement
+9:N/A
+10:Metamagic
+11:N/A
+12:Ability Score Improvement
+13:N/A
+14:Subclass feature
+15:N/A
+16:Ability Score Improvement
+17:Metamagic
+18:Subclass feature
+19:Epic Boon
+20:Arcane Apotheosis
+Spellcasting:Full
+Metamagic:Careful Spell;Distant Spell;Empowered Spell;Extended Spell;Heightened Spell;Quickened Spell;Seeking Spell;Subtle Spell;Transmuted Spell;Twinned Spell
+Subclasses:Aberrant Sorcery;Clockwork Sorcery;Draconic Sorcery;Wild Magic Sorcery

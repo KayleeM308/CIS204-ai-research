@@ -19,11 +19,17 @@ int search_in_features(char* search, char arr[][256]) {
 // Used in displayClassInfo function
 void loopingPrint(char arr[][256]) {
     int i = 0; //Initialize i
+    int j = 0;
     while (arr[i][0] != '\0') { //To end early if no (more) proficiencies
-        if (i != 0) //To ensure no comma before first
+        if (i != 0 && j != 5) //To ensure no comma before first
             printf(", ");
+        if (j == 5) { //So display does not go off the side of the screen
+            printf("\n ");
+            j = 0;
+        }
         printf("%s", arr[i]);
         i++; //Incrementation
+        j++;
     }
 }
 
@@ -45,27 +51,19 @@ int loadClassFromFile(const char* filepath, Class* outClass)
 
     // Variable Declaration
     char line[512]; // Buffer for reading lines
-    char originalLine[512]; //To keep original line
+    //char originalLine[512]; //To keep original line
     char* token; //Key token for compare
     char* temp; //Rest of line after key
     int i; //loop variable
     int featureCnt = 0;
     int extraFeatCnt = 0;
-    char* extraFeature; //String check for extra features
-    int extraListPos; //Position of extra features. Will always have Subclasses
+    int extraListPos = 0; //Position of extra features. Will always have Subclasses
     
     //While there are lines to read
-    while (fgets(line, sizeof(line), classfile) != NULL) {
-        strcpy(originalLine, line); //Store original line for debugging
-        token = strtok(originalLine, ":"); //Takes the first token (key)
-        temp = strtok(NULL, ""); //Takes rest of the string
-        temp++; //Skips the space
-        line[0] = '\0';
+    while ((temp = fgets(line, sizeof(line), classfile)) != NULL) { //Makes temp = line to save original line
+    
+        token = strtok_r(temp, ":", &temp); //Takes the first token (key)
 
-        //Make sure no core dump
-        if (temp != NULL)
-            strcpy(line, temp); //line is assigned the rest of the string
-        
         //Compare key and populate struct fields
         //// Name
         if (strcmp(token, "Name") == 0) {
@@ -81,16 +79,8 @@ int loadClassFromFile(const char* filepath, Class* outClass)
             i = 0;
 
             //Going through the list of proficiencies
-            while ((profToken = strtok(line, ";")) != NULL) {
-                if (isspace(profToken[0]))
-                    profToken++; //Skip leading space
+            while ((profToken = strtok_r(temp, ";", &temp)) != NULL) {
                 strcpy(outClass->armorProf[i], profToken);
-                line[0] = '\0'; //Clear line for temp
-                
-                //Avoids segmentation fault
-                temp = strtok(NULL, "");
-                if (temp != NULL)
-                    strcpy(line, temp);
                 i++;
             }
         }
@@ -100,16 +90,8 @@ int loadClassFromFile(const char* filepath, Class* outClass)
             i = 0;
 
             //Going through the list of proficiencies
-            while ((profToken = strtok(line, ";")) != NULL) {
-                if (isspace(profToken[0]))
-                    profToken++; //Skip leading space
+            while ((profToken = strtok_r(temp, ";", &temp)) != NULL) {
                 strcpy(outClass->weaponProf[i], profToken);
-                line[0] = '\0'; //Clear line for temp
-                
-                //Avoids segmentation fault
-                temp = strtok(NULL, "");
-                if (temp != NULL)
-                    strcpy(line, temp);
                 i++;
             }
         }
@@ -117,16 +99,8 @@ int loadClassFromFile(const char* filepath, Class* outClass)
         else if(strcmp(token, "SavingThrows") == 0) {
             char* profToken;
             for (i = 0; i < 2; i++) {
-                profToken = strtok(line, ";");
-                if (isspace(profToken[0]))
-                    profToken++; //Skip leading space
+                profToken = strtok_r(temp, ";", &temp);
                 strcpy(outClass->savingThrowProf[i], profToken);
-                line[0] = '\0'; //Clear line for temp
-                
-                //Avoids segmentation fault
-                temp = strtok(NULL, "");
-                if (temp != NULL)
-                    strcpy(line, temp);
             }
         }
         //// Skill Proficiencies
@@ -135,16 +109,8 @@ int loadClassFromFile(const char* filepath, Class* outClass)
             i = 0;
 
             //Going through the list of proficiencies
-            while ((profToken = strtok(line, ";")) != NULL) {
-                if (isspace(profToken[0]))
-                    profToken++; //Skip leading space
+            while ((profToken = strtok_r(temp, ";", &temp)) != NULL) {
                 strcpy(outClass->skillProf[i], profToken);
-                line[0] = '\0'; //Clear line for temp
-                
-                //Avoids segmentation fault
-                temp = strtok(NULL, "");
-                if (temp != NULL)
-                    strcpy(line, temp);
                 i++;
             }
         }
@@ -154,45 +120,31 @@ int loadClassFromFile(const char* filepath, Class* outClass)
             i = 0;
 
             //Going through the list of proficiencies
-            while ((profToken = strtok(line, ";")) != NULL) {
-                if (isspace(profToken[0]))
-                    profToken++; //Skip leading space
+            while ((profToken = strtok_r(temp, ";", &temp)) != NULL) {
                 strcpy(outClass->extraProf[i], profToken);
-                line[0] = '\0'; //Clear line for temp
-                
-                //Avoids segmentation fault
-                temp = strtok(NULL, "");
-                if (temp != NULL)
-                    strcpy(line, temp);
                 i++;
             }
         }
         //// Features (1 - 20)
         else if(isdigit(token[0])) {
             char* profToken;
-            temp = NULL;
             i = 0;
 
             //Going through the list of proficiencies
-            while ((profToken = strtok(line, ";")) != NULL) {
-                if (isspace(profToken[0]))
-                    profToken++; //Skip leading space
-
+            while ((profToken = strtok_r(temp, ";", &temp)) != NULL) {
                 strcpy(outClass->features[featureCnt][i], profToken);
 
-                //For features like Eldritch Invocations
-                if (strchr(profToken, '*') != NULL)
-                    strcpy(outClass->extraFeatName[extraFeatCnt++], profToken);
+                //If extra feature
+                if (strchr(profToken, '*') != NULL) {
+                    if (strchr(profToken, '\n') != NULL)
+                        strncpy(outClass->extraFeatName[extraFeatCnt], profToken, sizeof(profToken)/sizeof(profToken[0]));
+                    else
+                        strcpy(outClass->extraFeatName[extraFeatCnt], profToken);
+                    extraFeatCnt++;
+                }
 
-                line[0] = '\0'; //Clear line for temp
-                
-                //Avoids segmentation fault
-                temp = strtok(NULL, "");
-                if (temp != NULL)
-                    strcpy(line, temp);
-
-                i++; //increment position
-            }  
+                i++;
+            } 
             
             featureCnt++; //increment feature number to go through 1-20
         }
@@ -202,25 +154,25 @@ int loadClassFromFile(const char* filepath, Class* outClass)
         }
         ////Extra features
         //Calls search_in_features function for index, if index > 0 the coninues, if not then pass
-        else if ((extraListPos = search_in_features((extraFeature = strcat(token, "*")), outClass->extraFeatName)) > -1) {
+        else {
             char* profToken;
             i = 0;
 
+            outClass->extraFeatName[extraListPos][0] = '\0';
+            strcpy(outClass->extraFeatName[extraListPos], token);
+
             //Going through the list of proficiencies
-            while ((profToken = strtok(line, ";")) != NULL) {
-                if (isspace(profToken[0]))
-                    profToken++; //Skip leading space
+            
+            while ((profToken = strtok_r(temp, ";", &temp)) != NULL) {
                 strcpy(outClass->extraFeatList[extraListPos][i], profToken);
-                line[0] = '\0'; //Clear line for temp
-                
-                //Avoids segmentation fault
-                temp = strtok(NULL, "");
-                if (temp != NULL)
-                    strcpy(line, temp);
                 i++;
             }
+
+            extraListPos++;
+            
         }
     }
+
     //Close file
     fclose(classfile);
 return 0;
@@ -235,9 +187,12 @@ return 0;
 //   4. Populate all struct fields with the class data (name, hitDie, proficiencies, features, subclasses)
 //   5. Return a pointer to the populated Class struct
 //   6. If class not found, return NULL
-Class* getClassInfo(const char* className) 
+Class* getClassInfo(char* className, Class* classList, int classCount) 
 {
     // TODO: Implement class lookup and struct population
+
+
+
     
     return NULL;
 }
@@ -259,7 +214,7 @@ void displayClassInfo(Class* chosenClass)
     printf("\n||||| CLASS OVERVIEW |||||\n\n");
     printf("%s\n", chosenClass->name); //Class name
     printf("Hit Point Die: %s", chosenClass->hitDie); //Class hit die
-    printf("Saving Throws: %s, %s", chosenClass->savingThrowProf[0], chosenClass->savingThrowProf[1]); //Only ever 2
+    printf("Saving Throws: %s and %s", chosenClass->savingThrowProf[0], chosenClass->savingThrowProf[1]); //Only ever 2
 
     //Looping for other proficiences
     //Armor
@@ -271,7 +226,7 @@ void displayClassInfo(Class* chosenClass)
     loopingPrint(chosenClass->weaponProf);
 
     //Skills
-    printf("Skills (Chosen from): ");
+    printf("Skills (Chosen from):\n ");
     loopingPrint(chosenClass->skillProf);
 
     //Languages and Tools
@@ -302,12 +257,12 @@ void displayClassInfo(Class* chosenClass)
     printf("\n");
     int j = 0; //Initialize i
     while (chosenClass->extraFeatName[j][0] != '\0') { //To end early if no (more) extra
-        printf("%s ", chosenClass->extraFeatName[j]);
+        printf("%s\n ", chosenClass->extraFeatName[j]);
         loopingPrint(chosenClass->extraFeatList[j]);
         j++;
         printf("\n");
     }
-    printf("\n");
+    
 
     return;
 }

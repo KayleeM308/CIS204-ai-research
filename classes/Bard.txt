@@ -1,29 +1,29 @@
-Name: Bard
-HitDie: 
-ArmorProf: 
-WeaponProf: 
-SavingThrows: 
-Skills: 
-ExtraProf: 
-1: 
-2: 
-3: 
-4: 
-5: 
-6: 
-7: 
-8: 
-9: 
-10: 
-11: 
-12: 
-13: 
-14: 
-15: 
-16: 
-17: 
-18: 
-19: 
-20: 
-Spellcasting: 
-Subclasses:
+Name:Bard
+HitDie:d8
+ArmorProf:Light Armor
+WeaponProf:Simple Weapons
+SavingThrows:Dexterity;Charisma
+Skills:Any
+ExtraProf:Any Musical Instrument
+1:Bardic Inspiration;Spellcasting
+2:Jack of All Trades;Expertise
+3:Subclasses*
+4:Ability Score Improvement
+5:Font of Inspiration
+6:Subclass feature
+7:Countercharm
+8:Ability Score Improvement
+9:Expertise
+10:Magical Secrets
+11:N/A
+12:Ability Score Improvement
+13:N/A
+14:Subclass feature
+15:N/A
+16:Ability Score Improvement
+17:N/A
+18:Superior Inspiration
+19:Epic Boon
+20:Words of Creation
+Spellcasting:Full
+Subclasses:College of Dance;College of Glamour;College of Lore;College of Valor

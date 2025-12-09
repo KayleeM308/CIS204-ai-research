@@ -23,12 +23,31 @@ int main()
     // Initialize program: Get information from files
     //   - Add loaded classes to linked list for easy access
 
-    Class Barbarian;
-    char filepath[50] = "classes/Barbarian.txt";
+    //Variable Declelartion
+    /*int numClass = 12; //Number of classes
+    char filepath[] = "classes/";
+    Class classList[numClass]; //Array to hold all classes;
+    char classFiles[12][20] = {
+        "Barbarian.txt", "Bard.txt", "Cleric.txt", "Druid.txt", "Fighter.txt", "Monk.txt",
+        "Paladin.txt", "Ranger.txt", "Rogue.txt", "Sorcerer.txt", "Warlock.txt", "Wizard.txt"
+    };
 
-    loadClassFromFile(filepath, &Barbarian);
+    Class* currClass;
+    Class* matchingClass; //Pre defined pointer class for the function
 
-    displayClassInfo(&Barbarian);
+    //Load each class from the files
+    for (int i = 0; i < numClass; i++) {
+        loadClassFromFile((strcat(filepath, classFiles[i])), &classList[i]);
+    }*/
+
+    Class Fighter;
+    loadClassFromFile("classes/Fighter.txt", &Fighter);
+    displayClassInfo(&Fighter);
+
+
+
+
+
 
     // TODO: Display welcome message and program description
     

@@ -1,29 +1,29 @@
-Name: Rogue
-HitDie: 
-ArmorProf: 
-WeaponProf: 
-SavingThrows: 
-Skills: 
-ExtraProf: 
-1: 
-2: 
-3: 
-4: 
-5: 
-6: 
-7: 
-8: 
-9: 
-10: 
-11: 
-12: 
-13: 
-14: 
-15: 
-16: 
-17: 
-18: 
-19: 
-20: 
-Spellcasting: 
-Subclasses:
+Name:Rogue
+HitDie:d8
+ArmorProf:Light Armor
+WeaponProf:Simple Weapons;(Finesse or Light) Martial Weapons
+SavingThrows:Dexterity;Intelligence
+Skills:Acrobatics;Athletics;Deception;Insight;Intimidation;Investigation;Perception;Persuasion;Sleight of Hand;Stealth
+ExtraProf:Theives' Tools
+1:Expertise;Sneak Attack;Thieves' Cant;Weapon Mastery
+2:Cunning Action
+3:Subclasses*
+4:Ability Score Improvement
+5:Cunning Strike;Uncanny Dodge
+6:Expertise
+7:Evasion;Reliable Talent
+8:Ability Score Improvement
+9:Subclass feature
+10:Ability Score Improvement
+11:Improved Cunning Strike
+12:Ability Score Improvement
+13:Subclass feature
+14:Devious Strike
+15:Slippery Mind
+16:Ability Score Improvement
+17:Subclass feature
+18:Elusive
+19:Epic Boon
+20:Stroke of Luck
+Spellcasting:None
+Subclasses:Arcane Trickster;Assassin;Soulknife;Thief

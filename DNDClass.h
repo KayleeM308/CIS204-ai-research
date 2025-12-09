@@ -9,7 +9,7 @@
 #define MAX_SAVE_THROWS 6
 #define MAX_SKILLS 18
 #define MAX_EXTRA_PROF 10
-#define MAX_FEATURES 20
+#define MAX_FEATURES 40
 #define MAX_SUBCLASSES 4
 #define MAX_STRING_LENGTH 256
 
@@ -33,7 +33,7 @@ typedef struct {
 } Class;
 
 // Function prototypes
-Class* getClassInfo(const char* className);
+Class* getClassInfo(char* className, Class* classList, int classCount);
 void displayClassInfo(Class* chosenClass);
 void extraFeatureDisplay(Class* chosenClass);
 char* detailedSearchClass(Class* chosenClass, const char* searchTerm);

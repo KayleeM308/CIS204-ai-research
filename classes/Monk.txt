@@ -1,29 +1,29 @@
-Name: Monk
-HitDie: 
-ArmorProf: 
-WeaponProf: 
-SavingThrows: 
-Skills: 
-ExtraProf: 
-1: 
-2: 
-3: 
-4: 
-5: 
-6: 
-7: 
-8: 
-9: 
-10: 
-11: 
-12: 
-13: 
-14: 
-15: 
-16: 
-17: 
-18: 
-19: 
-20: 
-Spellcasting: 
-Subclasses:
+Name:Monk
+HitDie:d8
+ArmorProf:None
+WeaponProf:Simple Weapons;(Light) Martial Weapons
+SavingThrows:Strength;Dexterity
+Skills:Acrobatics;Athletics;History;Insight;Religion;Stealth
+ExtraProf:Artisan's Tool;or Musical Instrument
+1:Martial Arts;Unarmored Defense
+2:Monk's Focus;Unarmored Movement;Uncanny Metabolism
+3:Deflect Attacks;Subclasses*
+4:Ability Score Improvement;Slow Fall
+5:Extra Attack;Stunning Strike
+6:Empowered Strikes;Subclass feature
+7:Evasion
+8:Ability Score Improvement
+9:Acrobatic Movement
+10:Heightened Focus;Self-Restoration
+11:Subclass feature
+12:Ability Score Improvement
+13:Deflect Energy
+14:Disciplined Survivor
+15:Perfect Focus
+16:Ability Score Improvement
+17:Subclass feature
+18:Superior Defense
+19:Epic Boon
+20:Body and Mind
+Spellcasting:None
+Subclasses:Warrior of Mercy;Warrior of Shadow;Warrior of the Elements;Warrior of the Open Hand

@@ -1,29 +1,30 @@
-Name: Fighter
-HitDie: 
-ArmorProf: 
-WeaponProf: 
-SavingThrows: 
-Skills: 
-ExtraProf: 
-1: 
-2: 
-3: 
-4: 
-5: 
-6: 
-7: 
-8: 
-9: 
-10: 
-11: 
-12: 
-13: 
-14: 
-15: 
-16: 
-17: 
-18: 
-19: 
-20: 
-Spellcasting: 
-Subclasses:
+Name:Fighter
+HitDie:d10
+ArmorProf:Light Armor;Medium Armor;Heavy Armor;Shields
+WeaponProf:Simple Weapons;Martial Weapons
+SavingThrows:Strength;Constitution
+Skills:Acrobatics;Animal Handling;Athletics;History;Insight;Intimidation;Persuasion;Perception;Survival
+ExtraProf:N/A
+1:Fighting Style*;Second Wind;Weapon Mastery
+2:Action Surge(1);Tactical Mind
+3:Subclasses*
+4:Ability Score Improvement
+5:Extra Attack;Tactical Shift
+6:Ability Score Improvement
+7:Subclass feature
+8:Ability Score Improvement
+9:Indomitable(1);Tactical Master
+10:Subclass feature
+11:Two Extra Attacks
+12:Ability Score Improvement
+13:Indomitable(2);Studied Attacks
+14:Ability Score Improvement
+15:Subclass feature
+16:Ability Score Improvement
+17:Action Surge(2);Indomitable(3)
+18:Subclass feature
+19:Epic Boon
+20:Three Extra Attacks
+Spellcasting:None
+Fighting Style:Archery;Blind Fighting;Defense;Dueling;Great Weapon Fighting;Interception;Protection;Thrown Weapon Fighting;Two-Weapon Fighting;Unarmed Fighting
+Subclasses:Battle Master;Champion;Eldritch Knight;Psi Warrior

@@ -1,29 +1,29 @@
-Name: Wizard
-HitDie: 
-ArmorProf: 
-WeaponProf: 
-SavingThrows: 
-Skills: 
-ExtraProf: 
-1: 
-2: 
-3: 
-4: 
-5: 
-6: 
-7: 
-8: 
-9: 
-10: 
-11: 
-12: 
-13: 
-14: 
-15: 
-16: 
-17: 
-18: 
-19: 
-20: 
-Spellcasting: 
-Subclasses: 
+Name:Wizard
+HitDie:d6
+ArmorProf:None
+WeaponProf:Simple Weapons
+SavingThrows:Intelligence;Wisdom
+Skills:Arcana;History;Insight;Investigation;Medicine;Nature;Religion
+ExtraProf:N/A
+1:Spellcasting;Ritual Adept;Arcane Recovery
+2:Scholar
+3:Subclasses*
+4:Ability Score Improvement
+5:Memorize Spell
+6:Subclass feature
+7:N/A
+8:Ability Score Improvement
+9:N/A
+10:Subclass feature
+11:N/A
+12:Ability Score Improvement
+13:N/A
+14:Subclass feature
+15:N/A
+16:Ability Score Improvement
+17:N/A
+18:Spell Mastery
+19:Epic Boon
+20:Signature Spells
+Spellcasting:Full
+Subclasses:Abjurer;Diviner;Evoker;Illusionist

@@ -1,29 +1,29 @@
-Name: Druid
-HitDie: 
-ArmorProf: 
-WeaponProf: 
-SavingThrows: 
-Skills: 
-ExtraProf: 
-1: 
-2: 
-3: 
-4: 
-5: 
-6: 
-7: 
-8: 
-9: 
-10: 
-11: 
-12: 
-13: 
-14: 
-15: 
-16: 
-17: 
-18: 
-19: 
-20: 
-Spellcasting: 
-Subclasses:
+Name:Druid
+HitDie:d8
+ArmorProf:Light Armor;Shields
+WeaponProf:Simple Weapons
+SavingThrows:Intelligence;Wisdom
+Skills:Arcana;Animal Handling;Insight;Medicine;Nature;Perception;Religion;Survival
+ExtraProf:Herbalism Kit
+1:Spellcasting;Druidic;Primal Order
+2:Wild Companion;Wild Shape
+3:Subclasses*
+4:Ability Score Improvement
+5:Wild Ressurgence
+6:Subclass feature
+7:Elemental Fury
+8:Ability Score Improvement
+9:N/A
+10:Subclass feature
+11:N/A
+12:Ability Score Improvement
+13:N/A
+14:Subclass feature
+15:Improved Elemental Fury
+16:Ability Score Improvement
+17:N/A
+18:Beast Spells
+19:Epic Boon
+20:Archdruid
+Spellcasting:Full
+Subclasses:Circle of the Land;Circle of the Sea;Circle of the Moon;Circle of the Stars
