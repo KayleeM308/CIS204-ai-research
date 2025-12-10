@@ -14,20 +14,12 @@
 //   5. Loop until user chooses to exit
 int main()
 {
-    // TODO: Declare variables
-    //   - Class pointer to hold retrieved class data
-    //   - String buffer to store user input
-    //   - Loop control variables
-    //   - Include a Linked List for loaded classes
-    
-    // Initialize program: Get information from files
-    //   - Add loaded classes to linked list for easy access
-
     //Variable Declelartion
     int numClass = 12; //Number of classes
     char filepath[50];
-    Class classList[12]; //Array to hold all classes;
+    Class classList[12]; //Array to hold all classes
     Class* matchClass;
+    //Class* matchesList[];
 
     char classFiles[12][50] = { //Array of class files
         "classes/Barbarian.txt", "classes/Bard.txt", "classes/Cleric.txt", "classes/Druid.txt", 
@@ -42,15 +34,11 @@ int main()
         memset(&classList[i], 0, sizeof(classList[i])); //Zero struct
 
         loadClassFromFile(filepath, &classList[i]); //load the class
+        displayClassInfo(&classList[i]);
 
         filepath[0] = '\0'; //Clear filepath
     }
 
-    matchClass = getClassInfo("Paladin", classList, numClass);
-    printf("Address: %p\n", matchClass);
-    //matchClass = &classList[0];
-    if (matchClass != NULL)
-        displayClassInfo(matchClass);
 
 
 

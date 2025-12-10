@@ -50,8 +50,7 @@ int loadClassFromFile(const char* filepath, Class* outClass)
     }
 
     // Variable Declaration
-    char line[256]; // Buffer for reading lines
-    //char originalLine[512]; //To keep original line
+    char line[550]; // Buffer for reading lines
     char* token; //Key token for compare
     char* temp; //Rest of line after key
     int i; //loop variable
@@ -153,7 +152,7 @@ int loadClassFromFile(const char* filepath, Class* outClass)
         }
         //// Spellcasting
         else if (strcmp(token, "Spellcasting") == 0) {
-            strncpy(outClass->spellcastingType, temp, 4);
+            strcpy(outClass->spellcastingType, temp);
         }
         ////Extra features
         //Calls search_in_features function for index, if index > 0 the coninues, if not then pass
@@ -164,8 +163,7 @@ int loadClassFromFile(const char* filepath, Class* outClass)
             outClass->extraFeatName[extraListPos][0] = '\0';
             strcpy(outClass->extraFeatName[extraListPos], token);
 
-            //Going through the list of proficiencies
-            
+            //Going through the list of extra features        
             while ((profToken = strtok_r(temp, ";", &temp)) != NULL) {
                 strcpy(outClass->extraFeatList[extraListPos][i], profToken);
                 i++;
@@ -174,6 +172,8 @@ int loadClassFromFile(const char* filepath, Class* outClass)
             extraListPos++;
             
         }
+
+        memset(line, 0, sizeof(line));
     }
 
     //Close file
@@ -192,17 +192,15 @@ return 0;
 //   6. If class not found, return NULL
 Class* getClassInfo(char* className, Class* classList, int classCount) 
 {
-    Class* classFound = NULL;
     // TODO: Implement class lookup and struct population
     for (int i = 0; i < classCount; i++) {
-        printf("Searching... checking %s for match...\n", classList[i].name);
         if (strcmp(className, classList[i].name) == 0) {
-            classFound = &classList[i];
-            break;
+            return &classList[i];
         }
+
     }
 
-    return classFound;
+    return NULL;
 }
 
 // Function: displayClassInfo
@@ -270,26 +268,11 @@ void displayClassInfo(Class* chosenClass)
     printf("\n");
     int j = 0; //Initialize i
     while (chosenClass->extraFeatName[j][0] != '\0') { //To end early if no (more) extra
-        printf("%s\n ", chosenClass->extraFeatName[j]);
+        printf("\n%s\n ", chosenClass->extraFeatName[j]);
         loopingPrint(chosenClass->extraFeatList[j]);
         j++;
         printf("\n");
     }
-    
-
-    return;
-}
-
-// Function: extraFeatureDisplay
-// Purpose: Display special class features (like Warlock invocations or Sorcerer metamagic)
-// Algorithm:
-//   1. Check if the class has special features to display
-//   2. Determine which class it is (check name)
-//   3. Display class-specific extra features/mechanics
-//   4. This is a helper function called by displayClassInfo()
-void extraFeatureDisplay(Class* chosenClass)
-{
-    // TODO: Implement display of class-specific extra features
     
     return;
 }
@@ -301,9 +284,23 @@ void extraFeatureDisplay(Class* chosenClass)
 //   2. Match the search term to the appropriate struct field
 //   3. Return a formatted string with the requested information
 //   4. If search term not found, return an appropriate message
-char* detailedSearchClass(Class* chosenClass, const char* searchTerm)
+char* detailedSearchClass(Class* chosenClass, char* searchTerm)
 {
-    // TODO: Implement detailed search within a class
+    if (searchTerm = "Hit Die") {
+        return chosenClass->hitDie;
+    } else if (searchTerm = "Saving Throws") {
+        return chosenClass->savingThrowProf;
+    } else if (searchTerm = "Armor") {
+        return chosenClass->armorProf;
+    } else if (searchTerm = "Weapon") {
+        return chosenClass->weaponProf;
+    } else if (searchTerm = "Skills") {
+        return chosenClass->skillProf;
+    } else if (searchTerm = "Extra") {
+        return chosenClass->extraProf;
+    } else if (searchTerm = "Features") {
+        //Do specific search
+    } 
     
     return NULL;
 }

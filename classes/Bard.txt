@@ -3,7 +3,7 @@ HitDie:d8
 ArmorProf:Light Armor
 WeaponProf:Simple Weapons
 SavingThrows:Dexterity;Charisma
-Skills:Any
+Skills:Acrobatics;Athletics;Arcana;Animal Handling;Deception;History;Insight;Intimidation;Investigation;Medicine;Nature;Perception;Performance;Persuasion;Religion;Sleight of Hand;Stealth;Survival
 ExtraProf:Any Musical Instrument
 1:Bardic Inspiration;Spellcasting
 2:Jack of All Trades;Expertise
