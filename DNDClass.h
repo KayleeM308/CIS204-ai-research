@@ -33,7 +33,7 @@ typedef struct {
 // Function prototypes
 Class* getClassInfo(char* className, Class* classList, int classCount);
 void displayClassInfo(Class* chosenClass);
-char* detailedSearchClass(Class* chosenClass, const char* searchTerm);
+void detailedSearchClass(Class* chosenClass, int searchTerm);
 char* detailedSearchFeature(const char* featureName);
 
 // Load class data from a plain-text file (see example in `classes/Barbarian.txt`)

@@ -282,27 +282,76 @@ void displayClassInfo(Class* chosenClass)
 // Algorithm:
 //   1. Take a Class pointer and a search term (like "Proficiencies", "Features", "Subclasses")
 //   2. Match the search term to the appropriate struct field
-//   3. Return a formatted string with the requested information
-//   4. If search term not found, return an appropriate message
-char* detailedSearchClass(Class* chosenClass, char* searchTerm)
+//   3. print the response
+void detailedSearchClass(Class* chosenClass, int searchTerm)
 {
-    if (searchTerm = "Hit Die") {
-        return chosenClass->hitDie;
-    } else if (searchTerm = "Saving Throws") {
-        return chosenClass->savingThrowProf;
-    } else if (searchTerm = "Armor") {
-        return chosenClass->armorProf;
-    } else if (searchTerm = "Weapon") {
-        return chosenClass->weaponProf;
-    } else if (searchTerm = "Skills") {
-        return chosenClass->skillProf;
-    } else if (searchTerm = "Extra") {
-        return chosenClass->extraProf;
-    } else if (searchTerm = "Features") {
-        //Do specific search
-    } 
-    
-    return NULL;
+    ////Printing corresponding output
+    switch (searchTerm) {
+    case 1: //Hit Die
+        printf("\n%s\n", chosenClass->name);
+        printf("Hit Point Die: %s", chosenClass->hitDie); //Class hit die
+        break;
+    case 2: //Saving throw proficiences
+        printf("\n%s\n", chosenClass->name);
+        printf("Saving Throws: %s and %s", chosenClass->savingThrowProf[0], chosenClass->savingThrowProf[1]); //Saving throws
+        break;
+    case 3: //Armor proficiences
+        printf("\n%s\n", chosenClass->name);
+        printf("Armor: ");
+        loopingPrint(chosenClass->armorProf);
+        break;
+    case 4: //Weapon proficiences
+        printf("\n%s\n", chosenClass->name);
+        printf("Weapons: ");
+        loopingPrint(chosenClass->weaponProf);
+        break;
+    case 5: //Spellcasting
+        printf("\n%s\n", chosenClass->name);
+        printf("Has Spellcasting? ");
+        if (strcmp(chosenClass->spellcastingType, "None") != 0)
+            printf("Yes");
+        else
+            printf("No");
+        break;
+    case 6:
+        //Determine which feature level
+        int level;
+        printf("\nWhich level? (Enter a number 1 - 20): ");
+        scanf("%d", &level);
+
+        while (level < 1 || level > 20) {
+            printf("Invalid: Enter a number 1 - 20: ");
+            scanf("%d", &level);
+        }
+        
+        printf("\n%s\n", chosenClass->name);
+        printf("Level %d: ", level);
+        loopingPrint(chosenClass->features[level - 1]);
+    case 7:
+        //Determine theextra feature of choice
+        int choice;
+        for (int i = 0; i < 10; i++) {
+            if (strlen(chosenClass->extraFeatName[i]) > 0) {
+                printf("\n%d: %s", i + 1, chosenClass->extraFeatName[i]);
+            }
+        }
+        printf("\n\nEnter the extra feature you wish to be listed. (Enter a number): ");
+
+        scanf("%d", &choice); //Getting the choice
+        printf("\n%s\n", chosenClass->name);
+        if (choice > 0 && strlen(chosenClass->extraFeatName[choice - 1]) > 0) {
+            printf("%s:\n", chosenClass->extraFeatName[choice - 1]);
+            loopingPrint(chosenClass->extraFeatList[choice - 1]);
+        }
+        else {
+            printf("Invalid choice.");
+        }
+        break;
+    default:
+        printf("Invalid input. Enter a choice as listed.");
+    }
+
+    printf("\n"); //New line print
 }
 
 // Function: detailedSearchFeature

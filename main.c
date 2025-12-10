@@ -34,15 +34,11 @@ int main()
         memset(&classList[i], 0, sizeof(classList[i])); //Zero struct
 
         loadClassFromFile(filepath, &classList[i]); //load the class
-        displayClassInfo(&classList[i]);
 
         filepath[0] = '\0'; //Clear filepath
     }
 
-
-
-
-
+    detailedSearchClass(&classList[2], 5);
 
     // TODO: Display welcome message and program description
     
