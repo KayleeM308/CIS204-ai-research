@@ -213,7 +213,6 @@ Class* getClassInfo(char* className, Class* classList, int classCount)
 //   5. Print features by level (iterate through features array, skip empty entries)
 //   6. Print subclasses available
 //   7. Print spellcasting status (yes/no)
-//   8. Call extraFeatureDisplay() if applicable
 void displayClassInfo(Class* chosenClass)
 {
     if (chosenClass == NULL) {
@@ -355,19 +354,52 @@ void detailedSearchClass(Class* chosenClass, int searchTerm)
 }
 
 // Function: detailedSearchFeature
-// Purpose: Search across all classes for a specific feature (like "Extra Attack")
+// Purpose: Search across all classes for a specific feature (like "Extra Attack") or like hitDie type
 // Algorithm:
 //   1. Take a feature name as input (like "Extra Attack")
-//   2. Search through all available classes
-//   3. Check each class's features array for a match
-//   4. Collect all class names that have this feature
-//   5. Return a formatted string listing all classes with that feature
-//   6. If no classes have the feature, return an appropriate message
-char* detailedSearchFeature(const char* featureName)
+//   2. Check each class's features array for a match
+//   3. Collect all class names that have this feature
+//   4. Return a boolean confirming if class has the requested feature
+//   5. If the class does not have the feature result in false
+bool detailedSearchFeature(char* search, Class* inClass)
 {
-    // TODO: Implement cross-class feature search
-    
-    return NULL;
+    //Seeing if search is in hitDie or spellcastingType
+    if (strcmp(inClass->hitDie, search) == 0 || strcmp(inClass->spellcastingType, search) == 0)
+        return true;
+    //Seeing if search is in armorProf
+    else if (search_in_features(search, inClass->armorProf) > -1)
+        return true;
+    //Seeing if search is in weaponProf
+    else if (search_in_features(search, inClass->weaponProf) > -1)
+        return true;
+    //Search in saving throw prof
+    else if (search_in_features(search, inClass->savingThrowProf) > -1)
+        return true;
+    //Search in skills
+    else if (search_in_features(search, inClass->skillProf) > -1)
+        return true;
+    //Search in extra
+    else if (search_in_features(search, inClass->extraProf) > -1)
+        return true;
+    //Search in features
+    for (int i = 0; i < 20; i++) {
+        if (search_in_features(search, inClass->features[i]) > -1)
+            return true;
+    }
+
+    if (search_in_features(search, inClass->extraFeatName) > -1)
+        return true;
+
+    //Search extra features
+    int j = 0;
+    while (strlen(inClass->extraFeatName[j]) > 0) {
+        if (search_in_features(search, inClass->extraFeatList[j]) > -1)
+            return true;
+        j++;
+    }
+
+    //If not found
+    return false;
 }
 
 

@@ -38,7 +38,6 @@ int main()
         filepath[0] = '\0'; //Clear filepath
     }
 
-    detailedSearchClass(&classList[2], 5);
 
     // TODO: Display welcome message and program description
     

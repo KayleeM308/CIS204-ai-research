@@ -34,7 +34,7 @@ typedef struct {
 Class* getClassInfo(char* className, Class* classList, int classCount);
 void displayClassInfo(Class* chosenClass);
 void detailedSearchClass(Class* chosenClass, int searchTerm);
-char* detailedSearchFeature(const char* featureName);
+bool detailedSearchFeature(char* featureName, Class* inClass);
 
 // Load class data from a plain-text file (see example in `classes/Barbarian.txt`)
 // Format: lines of "Key: value". Lists use semicolons to separate items.

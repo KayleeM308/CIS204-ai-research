@@ -1,6 +1,6 @@
 Name:Cleric
 HitDie:d8
-ArmorProf:Light Armor;Medium Armor, Shields
+ArmorProf:Light Armor;Medium Armor;Shields
 WeaponProf:Simple Weapons
 SavingThrows:Wisdom;Charisma
 Skills:History;Insight;Medicine;Persuasion;Religion
