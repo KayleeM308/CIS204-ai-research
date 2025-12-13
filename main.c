@@ -18,8 +18,12 @@ int main()
     int numClass = 12; //Number of classes
     char filepath[50];
     Class classList[12]; //Array to hold all classes
+    char matchesList[12][20];
+    bool programRun = true;
+    int optionChoice;
+    char wordChoice[30];
     Class* matchClass;
-    //Class* matchesList[];
+    char* cacheClear;
 
     char classFiles[12][50] = { //Array of class files
         "classes/Barbarian.txt", "classes/Bard.txt", "classes/Cleric.txt", "classes/Druid.txt", 
@@ -38,10 +42,106 @@ int main()
         filepath[0] = '\0'; //Clear filepath
     }
 
-
-    // TODO: Display welcome message and program description
+    printf("\n\t\t|||| DND CLASS SEARCH||||\n\n"); //Welcome message
     
-    // TODO: Create a menu loop that:
+    while (programRun) {
+        printf("||||Options||||\n\n");
+        printf("1. View D&D Class Information\n");
+        printf("2. Search for a Feature\n");
+        printf("3. Search Within a Class\n");
+        printf("4. Exit\n\n");
+
+        printf("Option choice (Enter an integer): ");
+        scanf("%d", &optionChoice);
+        printf("\n");
+
+        switch (optionChoice) {
+            case 1: //View all class information
+                //Get input
+                printf("Enter the class you want displayed: ");
+                scanf("%s", wordChoice);
+                //Get matching class and display
+                matchClass = getClassInfo(wordChoice, classList, numClass);
+                displayClassInfo(matchClass);
+
+                break;
+            case 2: //Find classes with feature
+                //Get input
+                printf("Enter the information you want to check for (Ex: d8 Ex: Extra Attack): ");
+                scanf("%s", wordChoice);
+                //Find matching classes
+                int j = 0;
+                for (int i = 0; i < numClass; i++) {
+                    if (detailedSearchFeature(wordChoice, &classList[i])) {
+                        strcat(matchesList[j], classList[i].name);
+                        j++;
+                    }
+                }
+                //Print matching classes
+                printf("\nClasses with \"%s\":", wordChoice);
+
+                j = 0;
+                for (int i = 0; i < numClass; i++) { //Prints matches
+                    if (matchesList[i][0] != '\0') {
+                        if (j != 0)
+                            printf(",");
+                        printf(" %s", matchesList[i]);
+                        j++;
+                    }
+                }
+
+                //If there were no matches
+                if (j == 0)
+                    printf(" None");
+
+                //Clear matchesList for next time
+                memset(matchesList, 0, sizeof(matchesList));
+                printf("\n");
+
+                break;
+            case 3:
+                //Get input
+                printf("Enter the class you want to search in: ");
+                scanf("%s", wordChoice);
+                //Get matching class and display
+                matchClass = getClassInfo(wordChoice, classList, numClass);
+
+                if (matchClass != NULL) { //Valid input check
+                    //Printing option menu
+                    printf("\n|||Class Information|||\n");
+                    printf("1. Hit Die\n");
+                    printf("2. Saving Throws\n");
+                    printf("3. Armor\n");
+                    printf("4. Weapons\n");
+                    printf("5. Skills\n");
+                    printf("6. Extra Proficiences\n");
+                    printf("7. Spellcasting\n");
+                    printf("8. Features\n");
+                    printf("9. Extra Features\n");
+                
+                    printf("Option choice (Enter an integer): ");
+                    scanf("%d", &optionChoice);
+
+                    detailedSearchClass(matchClass, optionChoice);
+                } else {
+                    printf("Invalid Class\n");
+                }
+                break;
+            case 4:
+                printf("Ending search......");
+                programRun = false;
+                break;
+            default:
+                printf("Invalid menu choice.\n");
+                printf("Safety precaution: Ending program");
+                programRun = false;
+                break;
+        }
+
+        optionChoice = 0;
+        printf("\n");
+    }
+
     //   1. Shows menu options to user:
     //      - "1. View D&D Class Information"
     //      - "2. Search for a Feature"

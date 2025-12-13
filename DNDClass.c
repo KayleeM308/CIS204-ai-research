@@ -304,7 +304,17 @@ void detailedSearchClass(Class* chosenClass, int searchTerm)
         printf("Weapons: ");
         loopingPrint(chosenClass->weaponProf);
         break;
-    case 5: //Spellcasting
+    case 5: //Skill proficiences
+        printf("\n%s\n", chosenClass->name);
+        printf("Skills: ");
+        loopingPrint(chosenClass->skillProf);
+        break;
+    case 6: //Weapon proficiences
+        printf("\n%s\n", chosenClass->name);
+        printf("Extra: ");
+        loopingPrint(chosenClass->extraProf);
+        break;
+    case 7: //Spellcasting
         printf("\n%s\n", chosenClass->name);
         printf("Has Spellcasting? ");
         if (strcmp(chosenClass->spellcastingType, "None") != 0)
@@ -312,7 +322,7 @@ void detailedSearchClass(Class* chosenClass, int searchTerm)
         else
             printf("No");
         break;
-    case 6:
+    case 8:
         //Determine which feature level
         int level;
         printf("\nWhich level? (Enter a number 1 - 20): ");
@@ -326,7 +336,7 @@ void detailedSearchClass(Class* chosenClass, int searchTerm)
         printf("\n%s\n", chosenClass->name);
         printf("Level %d: ", level);
         loopingPrint(chosenClass->features[level - 1]);
-    case 7:
+    case 9:
         //Determine theextra feature of choice
         int choice;
         for (int i = 0; i < 10; i++) {
